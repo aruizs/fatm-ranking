@@ -10,8 +10,9 @@ bootstrap = Bootstrap(application)
 moment = Moment(application)
 
 ranking_tn = RankingCapture()
-ranking_tn.load_games('app/games_TN_1580841079.json')
-ranking_tn.load_players('app/players_TN_1580841078.json')
+ranking_tn.load_ranking()
+ranking_tn.process_players()
+ranking_tn.process_games()
 
 players_tn = Players(ranking_tn.players, ranking_tn.games)
 players_tn.sort_games_by_date()
