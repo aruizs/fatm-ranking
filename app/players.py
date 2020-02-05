@@ -1,6 +1,7 @@
-from app.ranking_capture import RankingCapture
+from .ranking_capture import RankingCapture
 import datetime as dt
 import json
+
 
 class Players:
     def __init__(self, players, games):
