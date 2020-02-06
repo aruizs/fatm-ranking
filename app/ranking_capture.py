@@ -92,12 +92,12 @@ class RankingCapture:
                 table_count = table_count + 1
             player['partidos'] = player_games
 
-    def save_players(self):
-        with open('players_' + self._category + '_' + str(int(time.time())) + '.json', 'w') as file_out:
+    def save_players(self, players_file):
+        with open(players_file, 'w') as file_out:
             json.dump(self.players, file_out, ensure_ascii=False)
 
-    def save_games(self):
-        with open('games_' + self._category + '_' + str(int(time.time())) + '.json', 'w') as file_out:
+    def save_games(self, games_file):
+        with open(games_file, 'w') as file_out:
             json.dump(self.games, file_out, ensure_ascii=False)
 
     def load_players(self, players_file):
