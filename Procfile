@@ -1,0 +1,1 @@
+web: gunicorn fatm:application --timeout 600

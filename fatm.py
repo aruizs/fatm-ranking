@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-from .app.ranking_capture import RankingCapture
-from .app.players import Players
+from app.ranking_capture import RankingCapture
+from app.players import Players
 
 application = Flask(__name__)
 
