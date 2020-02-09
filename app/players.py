@@ -1,7 +1,7 @@
 from .ranking_capture import RankingCapture
 import datetime as dt
 import json
-from .scoring import BasicScoring
+from .scoring import BasicScoring, EloScoring
 
 
 class Players:
@@ -61,12 +61,12 @@ class Players:
             player1 = next((player for player in self.players if player["nombre"] == game['jugador1']), None)
             player2 = next((player for player in self.players if player["nombre"] == game['jugador2']), None)
 
-            scoring_algorithm = BasicScoring()
+            scoring_algorithm = EloScoring()
             inc_score1, inc_score2 = scoring_algorithm.calculate(player1.get("score", 0), player2.get("score", 0),
                                                                  winner_player)
 
-            player1["score"] = player1.get("score", 0) + inc_score1
-            player2["score"] = player2.get("score", 0) + inc_score2
+            player1["score"] = inc_score1
+            player2["score"] = inc_score2
 
         self.players = sorted(self.players, key=lambda k: (k.get("score", 0),  -int(k.get("partidos_perdidos", "0"))),
                               reverse=True)
