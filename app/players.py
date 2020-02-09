@@ -68,7 +68,8 @@ class Players:
             player1["score"] = player1.get("score", 0) + inc_score1
             player2["score"] = player2.get("score", 0) + inc_score2
 
-        self.players = sorted(self.players, key=lambda k: k.get("score", 0), reverse=True)
+        self.players = sorted(self.players, key=lambda k: (k.get("score", 0),  -int(k.get("partidos_perdidos", "0"))),
+                              reverse=True)
 
     def save(self):
         for player in self.players:
