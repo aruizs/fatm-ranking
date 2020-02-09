@@ -49,5 +49,8 @@ def update():
     ranking_tn.process_games()
     ranking_tn.save_players("players.json")
     ranking_tn.save_games("games.json")
+    players_tn.sort_games_by_date()
+    players_tn.remove_duplicate_games()
+    players_tn.scoring()
     return render_template('ranking.html', name="Ranking Global", people=players_tn.players)
 
