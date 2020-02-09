@@ -42,6 +42,13 @@ class Players:
         for player in self.players:
             if player not in not_repeated_players:
                 not_repeated_players.append(player)
+
+        done = set()
+        for player in self.players:
+            if player['nombre'] not in done:
+                done.add(player['nombre'])
+            else:
+                print("Duplicated player based on name ", player['nombre'])
         return len(not_repeated_players) != len(self.players)
 
     def scoring(self):

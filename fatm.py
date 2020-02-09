@@ -23,6 +23,7 @@ except FileNotFoundError:
 players_tn = Players(ranking_tn.players, ranking_tn.games)
 players_tn.sort_games_by_date()
 players_tn.remove_duplicate_games()
+players_tn.is_repeated_players()
 players_tn.scoring()
 
 
