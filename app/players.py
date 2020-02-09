@@ -1,6 +1,7 @@
 from .ranking_capture import RankingCapture
 import datetime as dt
 import json
+from .scoring import BasicScoring
 
 
 class Players:
@@ -57,19 +58,17 @@ class Players:
             if int(game['puntuacion_jugador1']) < int(game['puntuacion_jugador2']):
                 winner_player = 2
 
-            for player in self.players:
-                if player['nombre'] == game['jugador1']:
-                    if winner_player == 1:
-                        if 'score' in player:
-                            player['score'] = player['score'] + 1
-                        else:
-                            player['score'] = 1
-                elif player['nombre'] == game['jugador2']:
-                    if winner_player == 2:
-                        if 'score' in player:
-                            player['score'] = player['score'] + 1
-                        else:
-                            player['score'] = 1
+            player1 = next((player for player in self.players if player["nombre"] == game['jugador1']), None)
+            player2 = next((player for player in self.players if player["nombre"] == game['jugador2']), None)
+
+            scoring_algorithm = BasicScoring()
+            inc_score1, inc_score2 = scoring_algorithm.calculate(player1.get("score", 0), player2.get("score", 0),
+                                                                 winner_player)
+
+            player1["score"] = player1.get("score", 0) + inc_score1
+            player2["score"] = player2.get("score", 0) + inc_score2
+
+        self.players = sorted(self.players, key=lambda k: k.get("score", 0), reverse=True)
 
     def save(self):
         for player in self.players:
@@ -93,4 +92,3 @@ if __name__ == "__main__":
     print(players_tn.is_repeated_players())
     players_tn.scoring()
     players_tn.save()
-
