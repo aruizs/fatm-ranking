@@ -1,2 +1,2 @@
-web: newrelic-admin run-program gunicorn fatm:application --timeout 600
+web: newrelic-admin run-program gunicorn fatm:application --timeout 6000
 
