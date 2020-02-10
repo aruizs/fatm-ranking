@@ -52,6 +52,27 @@ class Players:
                 print("Duplicated player based on name ", player['nombre'])
         return len(not_repeated_players) != len(self.players)
 
+    def join_duplicated_players(self):
+        indexes_to_remove = set()
+        for i in range(len(self.players) - 1):
+            for j in range(i + 1, len(self.players)):
+                if self.players[i]['nombre'] == self.players[j]['nombre']:
+                    x = i
+                    y = j
+                    if self.players[i].get('scored_games', 0) == 0:
+                        x = j
+                        y = i
+                    self.players[x]['partidos_ganados'] = str(int(self.players[i]['partidos_ganados']) +
+                                                              int(self.players[j]['partidos_ganados']))
+                    self.players[x]['partidos_perdidos'] = str(int(self.players[i]['partidos_perdidos']) +
+                                                               int(self.players[j]['partidos_perdidos']))
+                    self.players[x]['partidos_jugados'] = str(int(self.players[i]['partidos_jugados']) +
+                                                              int(self.players[j]['partidos_jugados']))
+                    indexes_to_remove.add(y)
+
+        for index in sorted(indexes_to_remove, reverse=True):
+            del self.players[index]
+
     def scoring(self):
         for game in self.games:
             winner_player = 1
@@ -67,6 +88,8 @@ class Players:
 
             player1["score"] = inc_score1
             player2["score"] = inc_score2
+            player1["scored_games"] = player1.get("scored_games", 0) + 1
+            player2["scored_games"] = player2.get("scored_games", 0) + 1
 
         self.players = sorted(self.players, key=lambda k: (k.get("score", 0),  -int(k.get("partidos_perdidos", "0"))),
                               reverse=True)

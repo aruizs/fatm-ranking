@@ -11,6 +11,7 @@
             <th>Nombre</th>
             <th>PG</th>
             <th>PP</th>
+<!--            <th>Scored</th>-->
             <th>Puntuación</th>
         <tr>
     </thead>
@@ -21,6 +22,7 @@
             <td><a href={{ 'http://www.fatm.com.es/' ~ person['link'] }}>{{ person['nombre'] }}</a></td>
             <td>{{ person['partidos_ganados'] }}</td>
             <td>{{ person['partidos_perdidos'] }}</td>
+<!--            <td>{{ person['scored_games'] }}</td>-->
             <td>{{ person['score'] }}</td>
         </tr>
         {% endfor %}
