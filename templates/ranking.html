@@ -19,7 +19,7 @@
         {% for person in people %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td><a href={{ 'http://www.fatm.com.es/' ~ person['link'] }}>{{ person['nombre'] }}</a></td>
+            <td>{{ person['nombre'] }}</td>
             <td>{{ person['partidos_ganados'] }}</td>
             <td>{{ person['partidos_perdidos'] }}</td>
 <!--            <td>{{ person['scored_games'] }}</td>-->

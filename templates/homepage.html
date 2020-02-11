@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}FATM Ranking{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><a href="/liga_andalucia/ranking">Liga Andalucía</a></h1>
+    </div>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Posición</th>
+            <th>Nombre</th>
+            <th>PG</th>
+            <th>PP</th>
+            <th>Puntuación</th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for person in people_tn %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ person['nombre'] }}</td>
+            <td>{{ person['partidos_ganados'] }}</td>
+            <td>{{ person['partidos_perdidos'] }}</td>
+            <td>{{ person['score'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <div class="page-header">
+        <h2><a href="/super/ranking">Súper</a></h2>
+    </div>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Posición</th>
+            <th>Nombre</th>
+            <th>PG</th>
+            <th>PP</th>
+            <th>Puntuación</th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for person in people_sda %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ person['nombre'] }}</td>
+            <td>{{ person['partidos_ganados'] }}</td>
+            <td>{{ person['partidos_perdidos'] }}</td>
+            <td>{{ person['score'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <div class="page-header">
+        <h2><a href="/dhonor/ranking">D. Honor</a></h2>
+    </div>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Posición</th>
+            <th>Nombre</th>
+            <th>PG</th>
+            <th>PP</th>
+            <th>Puntuación</th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for person in people_dha %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ person['nombre'] }}</td>
+            <td>{{ person['partidos_ganados'] }}</td>
+            <td>{{ person['partidos_perdidos'] }}</td>
+            <td>{{ person['score'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

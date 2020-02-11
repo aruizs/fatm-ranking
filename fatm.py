@@ -60,15 +60,23 @@ def internal_server_error(e):
 
 @application.route('/')
 def index():
-    return render_template('ranking.html', name="Ranking Global", people=players_tn.players)
+    return render_template('homepage.html', people_tn=players_tn.players[0:10], people_sda=players_sda.players[0:10],
+                           people_dha=players_dha.players[0:10])
+
+
+@application.route('/liga_andalucia/ranking')
+def liga_andalucia_ranking():
+    return render_template('ranking.html', people=players_tn.players)
+
 
 @application.route('/super/ranking')
 def super_ranking():
-    return render_template('ranking.html', name="Ranking Global", people=players_sda.players)
+    return render_template('ranking.html', people=players_sda.players)
+
 
 @application.route('/dhonor/ranking')
 def dhonor_ranking():
-    return render_template('ranking.html', name="Ranking Global", people=players_dha.players)
+    return render_template('ranking.html', people=players_dha.players)
 
 
 @application.route('/update_ranking')
