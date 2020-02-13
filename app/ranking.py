@@ -1,13 +1,6 @@
 from .ranking_capture import RankingCapture
 from .players import Players
-from enum import Enum
-
-
-class Category(Enum):
-    TN = 1
-    SDA = 2
-    DHA = 3
-
+from .category import Category
 
 class Ranking:
     def __init__(self, category):
@@ -48,7 +41,7 @@ class Ranking:
         self._ranking.process_players()
         self._ranking.process_games()
 
-        self._players = Players(self._ranking.players, self._ranking.games)
+        self._players = Players(self._ranking.players, self._ranking.games, self._category)
         self._players.sort_games_by_date()
         self._players.remove_duplicate_games()
         self._players.is_repeated_players()

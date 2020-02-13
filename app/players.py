@@ -2,12 +2,24 @@ from .ranking_capture import RankingCapture
 import datetime as dt
 import json
 from .scoring import BasicScoring, EloScoring
+from .category import Category
 
 
 class Players:
-    def __init__(self, players, games):
+    DEFAULT_SCORE_DHA = 450
+    DEFAULT_SCORE_SDA = 700
+    DEFAULT_SCORE_TN = 950
+
+    def __init__(self, players, games, category):
         self._players = players
         self._games = games
+        self._default_score = 0
+        if category == Category.SDA:
+            self._default_score = self.DEFAULT_SCORE_SDA
+        elif category == Category.DHA:
+            self._default_score = self.DEFAULT_SCORE_DHA
+        elif category == Category.TN:
+            self._default_score = self.DEFAULT_SCORE_TN
 
     @property
     def players(self):
@@ -83,7 +95,8 @@ class Players:
             player2 = next((player for player in self.players if player["nombre"] == game['jugador2']), None)
 
             scoring_algorithm = EloScoring()
-            inc_score1, inc_score2 = scoring_algorithm.calculate(player1.get("score", 0), player2.get("score", 0),
+            inc_score1, inc_score2 = scoring_algorithm.calculate(player1.get("score", self._default_score),
+                                                                 player2.get("score", self._default_score),
                                                                  winner_player)
 
             player1["score"] = inc_score1
