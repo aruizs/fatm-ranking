@@ -64,17 +64,18 @@ def update():
 def liga_andalucia_profile(uid_player):
     uid_player = next((player for player in tn_ranking.players.players if player["uid"] == int(uid_player)), None)
 
-    return render_template("matches.html", matches=uid_player['played_matches'])
+    return render_template("matches.html", name=uid_player['nombre'], matches=uid_player['played_matches'])
 
 
 @application.route("/super/<uid_player>")
 def super_profile(uid_player):
     uid_player = next((player for player in sda_ranking.players.players if player["uid"] == int(uid_player)), None)
 
-    return render_template("matches.html", matches=uid_player['played_matches'])
+    return render_template("matches.html", name=uid_player['nombre'], matches=uid_player['played_matches'])
+
 
 @application.route("/dhonor/<uid_player>")
 def dhonor_profile(uid_player):
     uid_player = next((player for player in dha_ranking.players.players if player["uid"] == int(uid_player)), None)
 
-    return render_template("matches.html", matches=uid_player['played_matches'])
+    return render_template("matches.html", name=uid_player['nombre'], matches=uid_player['played_matches'])
