@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}FATM Ranking{% endblock %}
+
+{% block content %}
+<div class="container">
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Jugador ABC</th>
+            <th>Marcador ABC</th>
+            <th>Marcador XYZ</th>
+            <th>Jugador XYZ</th>
+            <th>Puntuación</th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for match in matches %}
+        <tr>
+            <td>{{ match['player_abc'] }}</td>
+            <td>{{ match['abc_score'] }}</td>
+            <td>{{ match['xyz_score'] }}</td>
+            <td>{{ match['player_xyz'] }}</td>
+            <td>{{ match['score'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

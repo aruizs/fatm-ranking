@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import time
 
 
 class RankingCapture:
@@ -48,6 +47,7 @@ class RankingCapture:
                         if field_count == 2:
                             player['link'] = html_field.a.get('href')
                             player['nombre'] = " ".join(html_field.get_text().split())
+                            player['uid'] = int.from_bytes(player['nombre'].encode(), 'little')
                         elif field_count == 3:
                             player['club'] = " ".join(html_field.get_text().split())
                         elif field_count == 4:
