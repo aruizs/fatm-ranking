@@ -104,7 +104,20 @@ class Players:
             player1["scored_games"] = player1.get("scored_games", 0) + 1
             player2["scored_games"] = player2.get("scored_games", 0) + 1
 
-        self.players = sorted(self.players, key=lambda k: (k.get("score", 0),  -int(k.get("partidos_perdidos", "0"))),
+            if "played_matches" not in player1:
+                player1['played_matches'] = []
+            if "played_matches" not in player2:
+                player2['played_matches'] = []
+
+            player1['played_matches'].append({"player_abc": player1["nombre"], "abc_score":
+                game['puntuacion_jugador1'], "xyz_score": game['puntuacion_jugador2'], "player_xyz": player2["nombre"],
+                                              "score": player1["score"]})
+
+            player2['played_matches'].append({"player_abc": player1["nombre"], "abc_score":
+                game['puntuacion_jugador1'], "xyz_score": game['puntuacion_jugador2'], "player_xyz": player2["nombre"],
+                                              "score": player2["score"]})
+
+        self.players = sorted(self.players, key=lambda k: (k.get("score", 0), -int(k.get("partidos_perdidos", "0"))),
                               reverse=True)
 
     def save(self):

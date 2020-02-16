@@ -1,6 +1,7 @@
 from .ranking_capture import RankingCapture
 from .players import Players
 from .category import Category
+from os import path
 
 class Ranking:
     def __init__(self, category):
@@ -38,8 +39,15 @@ class Ranking:
     def load(self):
         self._ranking = RankingCapture(self._ranking_urls, self._category.name, self._root_urls)
         self._ranking.load_ranking()
-        self._ranking.process_players()
-        self._ranking.process_games()
+        if path.exists("players_" + self._category.name + ".json") and \
+                path.exists("games_" + self._category.name + ".json"):
+            self._ranking.load_games("games_" + self._category.name + ".json")
+            self._ranking.load_players("players_" + self._category.name + ".json")
+        else:
+            self._ranking.process_players()
+            self._ranking.process_games()
+            self._ranking.save_players("players_" + self._category.name + ".json")
+            self._ranking.save_games("games_" + self._category.name + ".json")
 
         self._players = Players(self._ranking.players, self._ranking.games, self._category)
         self._players.sort_games_by_date()
@@ -47,3 +55,4 @@ class Ranking:
         self._players.is_repeated_players()
         self._players.scoring()
         self._players.join_duplicated_players()
+
