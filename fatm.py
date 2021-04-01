@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from app.ranking import Ranking, Category
+from pathlib import Path
 
 application = Flask(__name__)
 
@@ -52,6 +53,8 @@ def dhonor_ranking():
 
 @application.route('/update_ranking')
 def update():
+    for filename in Path(".").glob("*.json"):
+        filename.unlink()
     dha_ranking.load()
     sda_ranking.load()
     tn_ranking.load()

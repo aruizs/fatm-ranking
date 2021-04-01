@@ -12,10 +12,10 @@ class Ranking:
         self._root_urls = []
         if category == Category.DHA:
             self._ranking_urls = ["/ranking_jugadores.asp?Cod_Cat="]
-            self._root_urls = ["http://www.fatm.com.es/", "http://www.fatm.com.es/2019-2020_1_ronda/"]
+            self._root_urls = ["http://www.fatm.com.es/"]
         elif category == Category.SDA:
             self._ranking_urls = ["/ranking_jugadores.asp?Cod_Cat="]
-            self._root_urls = ["http://www.fatm.com.es/", "http://www.fatm.com.es/2019-2020_1_ronda/"]
+            self._root_urls = ["http://www.fatm.com.es/"]
         elif category == Category.TN:
             self._ranking_urls = ["/ranking_jugadores.asp?Cod_Cat="]
             self._root_urls = ["http://www.fatm.com.es/"]

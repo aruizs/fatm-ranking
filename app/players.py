@@ -1,14 +1,14 @@
 from .ranking_capture import RankingCapture
 import datetime as dt
 import json
-from .scoring import BasicScoring, EloScoring
+from .scoring import BasicScoring, EloScoring, FatmScoring
 from .category import Category
 
 
 class Players:
-    DEFAULT_SCORE_DHA = 450
-    DEFAULT_SCORE_SDA = 700
-    DEFAULT_SCORE_TN = 950
+    DEFAULT_SCORE_DHA = 0
+    DEFAULT_SCORE_SDA = 375
+    DEFAULT_SCORE_TN = 750
 
     def __init__(self, players, games, category):
         self._players = players
@@ -62,6 +62,7 @@ class Players:
                 done.add(player['nombre'])
             else:
                 print("Duplicated player based on name ", player['nombre'])
+        print("bb")
         return len(not_repeated_players) != len(self.players)
 
     def join_duplicated_players(self):
@@ -87,6 +88,7 @@ class Players:
 
     def scoring(self):
         for game in self.games:
+            print(game["jugador1"] + " " + game["jugador2"])
             winner_player = 1
             if int(game['puntuacion_jugador1']) < int(game['puntuacion_jugador2']):
                 winner_player = 2
@@ -94,7 +96,7 @@ class Players:
             player1 = next((player for player in self.players if player["nombre"] == game['jugador1']), None)
             player2 = next((player for player in self.players if player["nombre"] == game['jugador2']), None)
 
-            scoring_algorithm = EloScoring()
+            scoring_algorithm = FatmScoring()
             inc_score1, inc_score2 = scoring_algorithm.calculate(player1.get("score", self._default_score),
                                                                  player2.get("score", self._default_score),
                                                                  winner_player)
